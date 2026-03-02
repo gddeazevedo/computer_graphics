@@ -16,3 +16,7 @@ sudo dnf install freeglut-devel
 ## Rodar
 
 > make run
+
+## Tutorials
+
+- [OpenGL Tutorial, Professora Isabel Harb Manssour](https://www.inf.pucrs.br/~manssour/OpenGL/Tutorial.html)
