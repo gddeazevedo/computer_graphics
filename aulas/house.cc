@@ -78,6 +78,17 @@ void change_window_size(GLsizei w, GLsizei h) {
     } 
 }
 
+void keyboard(unsigned char key, int x, int y) {
+    switch (key) {
+        case 27: // ESC
+            exit(0);
+            break;
+        case 'd': // tecla 'd' para desenhar a casa
+            draw_house();
+            break;
+    }
+}
+
 void init_background_color() {
     glClearColor(0.25, 0.25, 0.25, 1.0);
 }
@@ -88,7 +99,8 @@ int main(int argc, char **argv) {
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(650, 250);
     glutCreateWindow("Casa");
-    glutDisplayFunc(draw_house);
+    glutDisplayFunc([](){});
+    glutKeyboardFunc(keyboard);
     glutReshapeFunc(change_window_size);
     init_background_color();
     glutMainLoop();
