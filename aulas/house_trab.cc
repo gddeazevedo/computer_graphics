@@ -2,6 +2,18 @@
 #include <GL/glut.h>
 
 void draw_house() {
+
+    /**
+     * Normalização de coordenadas (MinMax de range -1 a 1):
+     *     2x - (xmin + xmax)
+     * x = -------------------
+     *       (xmax - xmin)
+     * 
+     *     2y - (ymin + ymax)
+     * y = -------------------
+     *       (ymax - ymin)
+     */
+
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
@@ -64,7 +76,7 @@ void change_window_size(GLsizei w, GLsizei h) {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+    gluOrtho2D(-1.0, 1.0, -1.0, 1.0); // define o viewport para normalização de coordenadas (-1 a 1) em x e y
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
