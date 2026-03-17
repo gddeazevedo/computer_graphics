@@ -6,8 +6,8 @@
 #define Y_KEY 'y'
 #define Z_KEY 'z'
 #define rotate_x_axis(angle) glRotatef(angle, 1.0f, 0.0f, 0.0f) // rotaciona em torno do eixo (1, 0, 0) (eixo x) por um angulo de angle graus
-#define rotate_y_axis(angle) glRotatef(angle, 0.0f, 1.0f, 0.0f) // rotaciona em torno do eixo (0, 1, 0) (eixo y) por um angulo de angle_y graus
-#define rotate_z_axis(angle) glRotatef(angle, 0.0f, 0.0f, 1.0f) // rotaciona em torno do eixo (0, 0, 1) (eixo z) por um angulo de angle_z graus
+#define rotate_y_axis(angle) glRotatef(angle, 0.0f, 1.0f, 0.0f) // rotaciona em torno do eixo (0, 1, 0) (eixo y) por um angulo de angle graus
+#define rotate_z_axis(angle) glRotatef(angle, 0.0f, 0.0f, 1.0f) // rotaciona em torno do eixo (0, 0, 1) (eixo z) por um angulo de angle graus
 
 char title[] = "3D House";
 GLfloat angle_x = 0.0f;
@@ -49,13 +49,7 @@ void initGL() {
 
 void draw_cube() {
    // (x, y, z) do cubo
-   glTranslatef(1.5f, 0.0f, -7.0f);
-
-   // (x, y, z)
-   rotate_x_axis(angle_x);
-   rotate_y_axis(angle_y);
-   rotate_z_axis(angle_z);
-
+   glTranslatef(0.0, -1.0, 0.0);
    
    glBegin(GL_QUADS);
       // Top face (y = 1.0f)
@@ -104,16 +98,12 @@ void draw_cube() {
 
 void draw_roof() {
    // (x, y, z) da piramide
-   glTranslatef(1.5f, 0.0f, -7.0f);
-
-   rotate_x_axis(angle_x);
-   rotate_y_axis(angle_y);
-   rotate_z_axis(angle_z);
+   glTranslatef(0.0f, 1.0f, 0.0f);
 
    glBegin(GL_TRIANGLES);
       // Front
       glColor3f(10.0f, 0.0f, 0.0f);
-      glVertex3f( 0.0f, 1.0f, 0.0f);
+      glVertex3f( 0.0f, 1.0f, 0.0f); // vértice do topo da pirâmide
       glColor3f(0.0f, 1.0f, 0.0f);
       glVertex3f(-1.0f, -1.0f, 1.0f);
       glColor3f(0.0f, 0.0f, 1.0f);
@@ -148,12 +138,20 @@ void draw_roof() {
 void draw_house() {
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
    glMatrixMode(GL_MODELVIEW);
-
    glLoadIdentity();
-   draw_cube();
 
-   glLoadIdentity();
-   draw_roof();
+   glTranslatef(0.0f, 0.0f, -7.0f); // translada/move a casa para a posição (1.5, 0.0, -7.0) no espaço 3D. (x, y, z)
+   rotate_x_axis(angle_x); // rotaciona a casa em torno do eixo x por um angulo de angle_x graus
+   rotate_y_axis(angle_y); // rotaciona a casa em torno do eixo y por um angulo de angle_y graus
+   rotate_z_axis(angle_z); // rotaciona a casa em torno do eixo z por um angulo de angle_z graus
+
+   glPushMatrix();
+      draw_cube();
+   glPopMatrix();
+
+   glPushMatrix();
+      draw_roof();
+   glPopMatrix();
 
    glutSwapBuffers();
 }
