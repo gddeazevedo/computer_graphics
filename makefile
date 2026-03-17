@@ -8,3 +8,5 @@ compile++:
 
 run:
 	./$(OUTPUT)
+
+exec: compile run
