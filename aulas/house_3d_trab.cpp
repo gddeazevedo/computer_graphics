@@ -188,16 +188,22 @@ void handle_key_pressed(unsigned char key, int x, int y) {
             exit(EXIT_SUCCESS);
             break;
         case X_KEY:
-        case X_KEY_UPPER:
             angle_x += ROTATION_ANGLE;
             break;
         case Y_KEY:
-        case Y_KEY_UPPER:
             angle_y += ROTATION_ANGLE;
             break;
         case Z_KEY:
-        case Z_KEY_UPPER:
             angle_z += ROTATION_ANGLE;
+            break;
+        case X_KEY_UPPER:
+            angle_x -= ROTATION_ANGLE;
+            break;
+        case Y_KEY_UPPER:
+            angle_y -= ROTATION_ANGLE;
+            break;
+        case Z_KEY_UPPER:
+            angle_z -= ROTATION_ANGLE;
             break;
         case R_KEY:
         case R_KEY_UPPER:
