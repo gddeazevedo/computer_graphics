@@ -5,6 +5,9 @@
 #define X_KEY 'x'
 #define Y_KEY 'y'
 #define Z_KEY 'z'
+#define X_KEY_UPPER 'X'
+#define Y_KEY_UPPER 'Y'
+#define Z_KEY_UPPER 'Z'
 #define rotate_x_axis(angle) glRotatef(angle, 1.0f, 0.0f, 0.0f) // rotaciona em torno do eixo (1, 0, 0) (eixo x) por um angulo de angle graus
 #define rotate_y_axis(angle) glRotatef(angle, 0.0f, 1.0f, 0.0f) // rotaciona em torno do eixo (0, 1, 0) (eixo y) por um angulo de angle graus
 #define rotate_z_axis(angle) glRotatef(angle, 0.0f, 0.0f, 1.0f) // rotaciona em torno do eixo (0, 0, 1) (eixo z) por um angulo de angle graus
@@ -169,6 +172,20 @@ void handle_key_pressed(unsigned char key, int x, int y) {
          break;
       case Z_KEY:
          angle_z += ROTATION_ANGLE;
+         break;
+      case X_KEY_UPPER:
+         angle_x -= ROTATION_ANGLE;
+         break;
+      case Y_KEY_UPPER:
+         angle_y -= ROTATION_ANGLE;
+         break;
+      case Z_KEY_UPPER:
+         angle_z -= ROTATION_ANGLE;
+         break;
+      case 'r':
+         angle_x = 0.0f;
+         angle_y = 0.0f;
+         angle_z = 0.0f;
          break;
       default:
          break;
