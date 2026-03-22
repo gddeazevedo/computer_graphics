@@ -36,8 +36,8 @@ void render() {
     glBegin(GL_TRIANGLES);
         glColor3f(1.0, 0.0, 0.0);
         for (auto& vertex : vertices) {
-            // vertex[0] += -0.25f;
-            // vertex[1] += -0.25f;
+            vertex[0] -= 0.5f;
+            vertex[1] -= 0.5f;
             glVertex2fv(vertex.data());
         }
     glEnd();
