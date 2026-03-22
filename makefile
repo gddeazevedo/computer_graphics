@@ -10,3 +10,4 @@ run:
 	./$(OUTPUT)
 
 exec: compile run
+exec++: compile++ run
