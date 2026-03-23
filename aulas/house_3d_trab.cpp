@@ -164,10 +164,12 @@ void draw_house() {
     glLoadIdentity();
 
     glTranslatef(0.0f, 0.0f, -10.0f); // translada a casa para trás, para que ela fique visível na tela (-7.0f no eixo z)
-
+    
     rotate_x_axis(angle_x); // rotaciona a casa em torno do eixo x por um angulo de angle_x graus
     rotate_y_axis(angle_y); // rotaciona a casa em torno do eixo y por um angulo de angle_y graus
     rotate_z_axis(angle_z); // rotaciona a casa em torno do eixo z por um angulo de angle_z graus
+
+    // primeiro rotaciona nos eixos x, y e z e depois translada -10 no eixo z
 
     glPushMatrix();
         draw_cube();
