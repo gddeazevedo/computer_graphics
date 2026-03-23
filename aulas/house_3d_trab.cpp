@@ -216,7 +216,7 @@ void handle_key_pressed(unsigned char key, int x, int y) {
         default:
             break;
     }
-    glutPostRedisplay();
+    glutPostRedisplay(); // solicita que a tela seja redesenhada, chamando a função de callback em glutDisplayFunc novamente
 }
 
 void reshape(GLsizei width, GLsizei height) {
