@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 }
 
 void initGL() {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClearDepth(1.0f);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
@@ -88,10 +88,10 @@ void draw_cube() {
         glColor3f(0.1, 0.1, 0.1);
 
         // retangulo da porta
-        glVertex3f( 0.3f,  0.3f, 2.0f); // vértice superior esquerdo da porta
-        glVertex3f(-0.4f,  0.3f, 2.0f); // vértice inferior esquerdo da porta
-        glVertex3f(-0.4f, -1.0f, 2.0f); // vértice inferior  da porta
-        glVertex3f( 0.3f, -1.0f, 2.0f); // vértice inferior direito da porta
+        glVertex3f( 0.3f,  0.4f, 2.01f);  // vértice superior esquerdo da porta
+        glVertex3f(-0.4f,  0.4f, 2.01f);  // vértice inferior esquerdo da porta
+        glVertex3f(-0.4f, -0.95f, 2.01f); // vértice inferior  da porta
+        glVertex3f( 0.3f, -0.95f, 2.01f); // vértice inferior direito da porta
 
         // Back face (z = -1.0f)
         glColor3f(red, green, blue);
