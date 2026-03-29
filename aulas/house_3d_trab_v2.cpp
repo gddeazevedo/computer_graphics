@@ -13,9 +13,9 @@
 #define Z_KEY_UPPER 'Z'
 #define Q_KEY_UPPER 'Q'
 #define R_KEY_UPPER 'R'
-#define rotate_x_axis(angle) glRotatef(angle, 1.0f, 0.0f, 0.0f) // rotaciona em torno do eixo (1, 0, 0) (eixo x) por um angulo de angle graus
-#define rotate_y_axis(angle) glRotatef(angle, 0.0f, 1.0f, 0.0f) // rotaciona em torno do eixo (0, 1, 0) (eixo y) por um angulo de angle graus
-#define rotate_z_axis(angle) glRotatef(angle, 0.0f, 0.0f, 1.0f) // rotaciona em torno do eixo (0, 0, 1) (eixo z) por um angulo de angle graus
+#define rotate_x_axis(angle) glRotatef(angle, 1.0f, 0.0f, 0.0f)
+#define rotate_y_axis(angle) glRotatef(angle, 0.0f, 1.0f, 0.0f)
+#define rotate_z_axis(angle) glRotatef(angle, 0.0f, 0.0f, 1.0f)
 
 
 class House
@@ -45,11 +45,9 @@ void House::draw_cube() {
     const float green = 0.5f;
     const float blue  = 0.5f;
 
-    // (x, y, z) do cubo
     glTranslatef(0.0f, -1.0f, 0.0f);
 
     glBegin(GL_QUADS);
-        // Top face (y = 1.0f)
         glColor3f(red, green, blue);
 
         glVertex3f( 1.0f, 1.0f,  2.0f);
@@ -57,7 +55,6 @@ void House::draw_cube() {
         glVertex3f(-1.0f, 1.0f, -2.0f);
         glVertex3f( 1.0f, 1.0f, -2.0f);
 
-        // Bottom face (y = -1.0f)
         glColor3f(red, green, blue);
 
         glVertex3f( 1.0f, -1.0f,  2.0f);
@@ -65,7 +62,6 @@ void House::draw_cube() {
         glVertex3f(-1.0f, -1.0f, -2.0f);
         glVertex3f( 1.0f, -1.0f, -2.0f);
 
-        // Front face  (z = 1.0f)
         glColor3f(red, green, blue);
 
         glVertex3f( 1.0f,  1.0f, 2.0f);
@@ -73,16 +69,13 @@ void House::draw_cube() {
         glVertex3f(-1.0f, -1.0f, 2.0f);
         glVertex3f( 1.0f, -1.0f, 2.0f);
 
-        // door
         glColor3f(0.1, 0.1, 0.1);
 
-        // retangulo da porta
-        glVertex3f( 0.3f,  0.4f, 2.01f);  // vértice superior esquerdo da porta
-        glVertex3f(-0.4f,  0.4f, 2.01f);  // vértice inferior esquerdo da porta
-        glVertex3f(-0.4f, -0.95f, 2.01f); // vértice inferior  da porta
-        glVertex3f( 0.3f, -0.95f, 2.01f); // vértice inferior direito da porta
+        glVertex3f( 0.3f,  0.4f, 2.01f);
+        glVertex3f(-0.4f,  0.4f, 2.01f);
+        glVertex3f(-0.4f, -0.95f, 2.01f);
+        glVertex3f( 0.3f, -0.95f, 2.01f);
 
-        // Back face (z = -1.0f)
         glColor3f(red, green, blue);
 
         glVertex3f( 1.0f, -1.0f, -2.0f);
@@ -90,7 +83,6 @@ void House::draw_cube() {
         glVertex3f(-1.0f,  1.0f, -2.0f);
         glVertex3f( 1.0f,  1.0f, -2.0f);
 
-        // Left face (x = -1.0f)
         glColor3f(red, green, blue);
 
         glVertex3f(-1.0f,  1.0f,  2.0f);
@@ -98,7 +90,6 @@ void House::draw_cube() {
         glVertex3f(-1.0f, -1.0f, -2.0f);
         glVertex3f(-1.0f, -1.0f,  2.0f);
 
-        // Right face (x = 1.0f)
         glColor3f(red, green, blue);
 
         glVertex3f(1.0f,  1.0f, -2.0f);
@@ -113,32 +104,27 @@ void House::draw_roof() {
     const float green = 0.0f;
     const float blue  = 0.0f;
 
-    // (x, y, z) da piramide
     glTranslatef(0.0f, 1.0f, 0.0f);
 
     glBegin(GL_TRIANGLES);
-        // Front
         glColor3f(red, green, blue);
 
-        glVertex3f( 0.0f,  1.0f, 0.0f); // vértice do topo da pirâmide
+        glVertex3f( 0.0f,  1.0f, 0.0f);
         glVertex3f(-1.5f, -1.0f, 2.5f);
         glVertex3f( 1.5f, -1.0f, 2.5f);
 
-        // Right
         glColor3f(red, green, blue);
 
         glVertex3f(0.0f,  1.0f,  0.0f);
         glVertex3f(1.5f, -1.0f,  2.5f);
         glVertex3f(1.5f, -1.0f, -2.5f);
 
-        // Back
         glColor3f(red, green, blue);
 
         glVertex3f( 0.0f,  1.0f,  0.0f);
         glVertex3f( 1.5f, -1.0f, -2.5f);
         glVertex3f(-1.5f, -1.0f, -2.5f);
 
-        // Left
         glColor3f(red, green, blue);
 
         glVertex3f( 0.0f,  1.0f,  0.0f);
@@ -180,7 +166,9 @@ void House::set_angle_z(float angle) {
 
 
 
-House* current_house;
+House house1;
+House house2;
+House* current_house = &house1;
 
 
 void initGL();
@@ -198,7 +186,7 @@ int main(int argc, char **argv) {
     glutCreateWindow("3D House");
     glutDisplayFunc(draw_houses);
     glutReshapeFunc(reshape);
-    // glutKeyboardFunc(handle_key_pressed);
+    glutKeyboardFunc(handle_key_pressed);
     glutMouseFunc(handle_mouse_click);
     initGL();
     glutMainLoop();
@@ -220,11 +208,6 @@ void draw_houses() {
     glLoadIdentity();
 
     glTranslatef(0.0f, 0.0f, -10.0f); // translada as casas para trás, para que elas fiquem visíveis na tela (-7.0f no eixo z)
-    
-    House house1;
-    House house2;
-
-    current_house = &house1;
 
     glPushMatrix();
         house1.draw();
@@ -234,7 +217,6 @@ void draw_houses() {
         glTranslatef(5.0f, 0.0f, 0.0f); // translada a segunda casa para a direita
         house2.draw();
     glPopMatrix();
-
     glutSwapBuffers();
 }
 
@@ -272,11 +254,17 @@ void handle_key_pressed(unsigned char key, int x, int y) {
         default:
             break;
     }
-    glutPostRedisplay(); // solicita que a tela seja redesenhada, chamando a função de callback em glutDisplayFunc novamente
+    glutPostRedisplay();
 }
 
 void handle_mouse_click(int button, int state, int x, int y) {
-    printf("Mouse click detected at (%d, %d)\n", x, y);
+    if (state == GLUT_DOWN) {
+        if (button == GLUT_LEFT_BUTTON) {
+            current_house = &house1;
+        } else if (button == GLUT_RIGHT_BUTTON) {
+            current_house = &house2;
+        }
+    }
 }
 
 void reshape(GLsizei width, GLsizei height) {
