@@ -181,7 +181,7 @@ void draw_houses();
 int main(int argc, char **argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-    glutInitWindowSize(640, 480);
+    glutInitWindowSize(800, 520);
     glutInitWindowPosition(50, 50);
     glutCreateWindow("3D House");
     glutDisplayFunc(draw_houses);
@@ -207,14 +207,14 @@ void draw_houses() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glTranslatef(0.0f, 0.0f, -10.0f); // translada as casas para trás, para que elas fiquem visíveis na tela (-7.0f no eixo z)
+    glTranslatef(-3.0f, 0.0f, -10.0f);
 
     glPushMatrix();
         house1.draw();
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(5.0f, 0.0f, 0.0f); // translada a segunda casa para a direita
+        glTranslatef(6.0f, 0.0f, 0.0f); // translada a segunda casa para a direita
         house2.draw();
     glPopMatrix();
     glutSwapBuffers();
@@ -258,12 +258,18 @@ void handle_key_pressed(unsigned char key, int x, int y) {
 }
 
 void handle_mouse_click(int button, int state, int x, int y) {
-    if (state == GLUT_DOWN) {
-        if (button == GLUT_LEFT_BUTTON) {
-            current_house = &house1;
-        } else if (button == GLUT_RIGHT_BUTTON) {
-            current_house = &house2;
-        }
+    if (state != GLUT_DOWN) {
+        return;
+    }
+
+    if (button == GLUT_LEFT_BUTTON) {
+        current_house = &house1;
+        return;
+    }
+
+    if (button == GLUT_RIGHT_BUTTON) {
+        current_house = &house2;
+        return;
     }
 }
 
