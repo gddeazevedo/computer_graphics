@@ -66,27 +66,30 @@ void Camera::move_right(float distance) {
     float len = sqrt(dx*dx + dz*dz); // comprimento do vetor do observador ao centro do objeto
     dx /= len; // normaliza o vetor para obter a direção do movimento
     dz /= len; // normaliza o vetor para obter a direção do movimento
-    obsX -= dz * distance; obsZ += dx * distance;
-    centerX -= dz * distance; centerZ += dx * distance;
+    obsX -= dz * distance;
+    obsZ += dx * distance;
+    centerX -= dz * distance;
+    centerZ += dx * distance;
 }
 
 void Camera::move_left(float distance) {
     move_right(-distance);
 }
 
-void Camera::rotate_left(float angle) {
-    rotate_right(-angle);
-}
-
 void Camera::rotate_right(float angle) {
     float radians = angle * M_PI / 180.0f;
     // Serve para rotacionar o vetor do observador ao centro do objeto no plano XZ
+    // origem é o observador, destino é o objeto
     float dx = centerX - obsX; // distancia do observador ao centro do objeto no eixo X
     float dz = centerZ - obsZ; // distancia do observador ao centro do objeto no eixo Z
     float newDx = dx * cos(radians) - dz * sin(radians); // rotacao do vetor do observador ao centro do objeto no eixo X
     float newDz = dx * sin(radians) + dz * cos(radians); // rotacao do vetor do observador ao centro do objeto no eixo Z
     centerX = obsX + newDx;
     centerZ = obsZ + newDz;
+}
+
+void Camera::rotate_left(float angle) {
+    rotate_right(-angle);
 }
 
 
