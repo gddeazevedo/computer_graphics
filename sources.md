@@ -7,3 +7,9 @@
 - [Introdução à OpenGL](https://www.inf.pucrs.br/~manssour/OpenGL/Tutorial.html)
 
 - [Win32 OpenGL](https://learn.microsoft.com/pt-br/windows/win32/opengl/opengl)
+
+- [One video tutorial](https://www.youtube.com/watch?v=45MIykWJ-C4&t=394s)
+
+- [OpenGL tutorials](https://www.youtube.com/playlist?list=PLA0dXqQjCx0S04ntJKUftl6OaOgsiwHjA)
+
+- [Geometria para computação gráfica](https://www.youtube.com/playlist?list=PLvat2X-KHJNbL_JsbO_qiDP7863-dgzee)
