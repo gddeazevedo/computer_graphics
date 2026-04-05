@@ -34,7 +34,7 @@ class Camera {
         GLdouble centerX;
         GLdouble centerY;
         GLdouble centerZ;
-        Camera() : obsX(0), obsY(0), obsZ(200), centerX(0), centerY(0), centerZ(0) {}
+        Camera() : obsX(0), obsY(0), obsZ(0), centerX(0), centerY(0), centerZ(-1) {}
 
         void move_forward(float distance);
         void move_backward(float distance);
@@ -45,36 +45,48 @@ class Camera {
 };
 
 
-void Camera::move_backward(float distance) {
-    this->obsZ += distance;
-    this->centerZ += distance;
-}
-
 void Camera::move_forward(float distance) {
-    this->obsZ -= distance;
-    this->centerZ -= distance;
+    float dx = centerX - obsX; // distancia do observador ao centro do objeto no eixo X
+    float dz = centerZ - obsZ; // distancia do observador ao centro do objeto no eixo Z
+    float len = sqrt(dx*dx + dz*dz); // comprimento do vetor do observador ao centro do objeto
+    dx /= len; dz /= len; // normaliza o vetor para obter a direção do movimento
+    obsX += dx * distance;
+    obsZ += dz * distance;
+    centerX += dx * distance;
+    centerZ += dz * distance;
 }
 
-void Camera::move_left(float distance) {
-    this->obsX -= distance;
-    this->centerX -= distance;
+void Camera::move_backward(float distance) {
+    move_forward(-distance);
 }
 
 void Camera::move_right(float distance) {
-    this->obsX += distance;
-    this->centerX += distance;
+    float dx = centerX - obsX; // distancia do observador ao centro do objeto no eixo X
+    float dz = centerZ - obsZ; // distancia do observador ao centro do objeto no eixo Z
+    float len = sqrt(dx*dx + dz*dz); // comprimento do vetor do observador ao centro do objeto
+    dx /= len; // normaliza o vetor para obter a direção do movimento
+    dz /= len; // normaliza o vetor para obter a direção do movimento
+    obsX -= dz * distance; obsZ += dx * distance;
+    centerX -= dz * distance; centerZ += dx * distance;
+}
+
+void Camera::move_left(float distance) {
+    move_right(-distance);
 }
 
 void Camera::rotate_left(float angle) {
-    // Implementar rotação para a esquerda
+    rotate_right(-angle);
 }
 
 void Camera::rotate_right(float angle) {
     float radians = angle * M_PI / 180.0f;
-    float x = cos(radians);
-    float z = sin(radians);
-
-    // this->centerX += 
+    // Serve para rotacionar o vetor do observador ao centro do objeto no plano XZ
+    float dx = centerX - obsX; // distancia do observador ao centro do objeto no eixo X
+    float dz = centerZ - obsZ; // distancia do observador ao centro do objeto no eixo Z
+    float newDx = dx * cos(radians) - dz * sin(radians); // rotacao do vetor do observador ao centro do objeto no eixo X
+    float newDz = dx * sin(radians) + dz * cos(radians); // rotacao do vetor do observador ao centro do objeto no eixo Z
+    centerX = obsX + newDx;
+    centerZ = obsZ + newDz;
 }
 
 
@@ -271,6 +283,10 @@ void draw_houses() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    gluLookAt(camera.obsX, camera.obsY, camera.obsZ,
+              camera.centerX, camera.centerY, camera.centerZ,
+              0, 1, 0);
+
     glTranslatef(-3.0f, 0.0f, -10.0f);
 
     glPushMatrix();
@@ -278,7 +294,7 @@ void draw_houses() {
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(6.0f, 0.0f, 0.0f); // translada a segunda casa para a direita
+        glTranslatef(6.0f, 0.0f, 0.0f);
         house2.draw();
     glPopMatrix();
     glutSwapBuffers();
@@ -317,6 +333,19 @@ void handle_key_pressed(unsigned char key, int x, int y) {
             break;
         case W_KEY:
         case W_KEY_UPPER:
+            camera.move_forward(0.5f);
+            break;
+        case S_KEY:
+        case S_KEY_UPPER:
+            camera.move_backward(0.5f);
+            break;
+        case A_KEY:
+        case A_KEY_UPPER:
+            camera.move_left(0.5f);
+            break;
+        case D_KEY:
+        case D_KEY_UPPER:
+            camera.move_right(0.5f);
             break;
         default:
             break;
@@ -327,23 +356,15 @@ void handle_key_pressed(unsigned char key, int x, int y) {
 
 void handle_special_key_pressed(int key, int x, int y) {
     switch (key) {
-        case GLUT_KEY_UP:
-            printf("Up arrow key pressed\n");
-            break;
-        case GLUT_KEY_DOWN:
-            printf("Down arrow key pressed\n");
-            break;
         case GLUT_KEY_LEFT:
-            printf("Left arrow key pressed\n");
+            camera.rotate_left(5.0f);
             break;
         case GLUT_KEY_RIGHT:
-            printf("Right arrow key pressed\n");
+            camera.rotate_right(5.0f);
             break;
         default:
             break;
     }
-
-    gluLookAt(camera.obsX, camera.obsY, camera.obsZ, 0, 0, 0, 0, 1, 0);
 
     glutPostRedisplay();
 }
