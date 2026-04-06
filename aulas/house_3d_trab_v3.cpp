@@ -34,7 +34,7 @@ class Camera {
         GLdouble centerX;
         GLdouble centerY;
         GLdouble centerZ;
-        Camera() : obsX(0), obsY(0), obsZ(0), centerX(0), centerY(0), centerZ(-1) {}
+        Camera() : obsX(0), obsY(-0.75), obsZ(0), centerX(0), centerY(-0.75), centerZ(-1) {}
 
         void move_forward(float distance);
         void move_backward(float distance);
