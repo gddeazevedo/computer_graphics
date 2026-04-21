@@ -286,16 +286,15 @@ void draw_houses() {
               camera.centerX, camera.centerY, camera.centerZ,
               0, 1, 0);
 
-    GLfloat posicaoLuz[4]={10.0, 1.0, 1.0, 1.0};
+    GLfloat posicaoLuz[4]={100.0f, 1.0f, 1.0f, 1.0f};
     glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz);
 
     glTranslatef(-3.0f, 0.0f, -10.0f);
-    
 
     glPushMatrix();
         glDisable(GL_LIGHTING);
         glTranslatef(100.0f, 1.0f, 1.0f);
-        glutSolidSphere(20.0, 20, 20);
+        glutSolidSphere(5.0, 20, 20);
         glEnable(GL_LIGHTING);
     glPopMatrix();
 
