@@ -76,7 +76,13 @@ void change_window_size(GLsizei w, GLsizei h) {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-1.0, 1.0, -1.0, 1.0); // define o viewport para normalização de coordenadas (-1 a 1) em x e y
+    
+    float aspect = (float)w / (float)h;
+    if (aspect >= 1.0) {
+        gluOrtho2D(-aspect, aspect, -1.0, 1.0);
+    } else {
+        gluOrtho2D(-1.0, 1.0, -1.0/aspect, 1.0/aspect);
+    }
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -91,6 +97,7 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(650, 250);
+    glViewport(0, 0, 600, 600);
     glutCreateWindow("Casa");
     glutDisplayFunc(draw_house);
     glutReshapeFunc(change_window_size);

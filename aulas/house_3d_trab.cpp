@@ -163,7 +163,7 @@ void draw_house() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glTranslatef(0.0f, 0.0f, -10.0f); // translada a casa para trás, para que ela fique visível na tela (-7.0f no eixo z)
+    glTranslatef(0.0f, 0.0f, -10.0f); // translada a casa para trás, para que ela fique visível na tela (-7.0f no eixo z) a casa está no centro da tela em x e y
     
     rotate_x_axis(angle_x); // rotaciona a casa em torno do eixo x por um angulo de angle_x graus
     rotate_y_axis(angle_y); // rotaciona a casa em torno do eixo y por um angulo de angle_y graus
@@ -230,5 +230,5 @@ void reshape(GLsizei width, GLsizei height) {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+    gluPerspective(70.0f, aspect, 0.1f, 100.0f);
 }
