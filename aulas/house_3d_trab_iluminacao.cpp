@@ -286,14 +286,11 @@ void draw_houses() {
               camera.centerX, camera.centerY, camera.centerZ,
               0, 1, 0);
 
-    GLfloat posicaoLuz[4]={100.0f, 1.0f, 1.0f, 1.0f};
-    glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz);
-
     glTranslatef(-3.0f, 0.0f, -10.0f);
 
     glPushMatrix();
         glDisable(GL_LIGHTING);
-        glTranslatef(100.0f, 1.0f, 1.0f);
+        glTranslatef(1.0,1.0,100.0);
         glutSolidSphere(5.0, 20, 20);
         glEnable(GL_LIGHTING);
     glPopMatrix();
@@ -387,5 +384,5 @@ void reshape(GLsizei width, GLsizei height) {
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+    gluPerspective(45.0f, aspect, 0.1f, 1000.0f);
 }
